@@ -13,10 +13,11 @@ class Store(models.Model):
     safety_policy = models.TextField()
     location = models.CharField(max_length=256)
     store_hours = models.TextField()
-
+    
 class Code(models.Model):
     uuid = models.UUIDField(primary_key=True)
     store = models.ForeignKey(Store, on_delete=models.CASCADE, related_name='store')
+    in_store = models.BooleanField(default=False)
 
 class User(AbstractUser):
     name = models.CharField(max_length=128)
