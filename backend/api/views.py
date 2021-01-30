@@ -5,7 +5,7 @@ from .serializers import UserSerializer, StoreSerializer
 from .models import User, Store
 
 # Create your views here.
-class UserViewSet(viewsets.ViewSet):
+class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
