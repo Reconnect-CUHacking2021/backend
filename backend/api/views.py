@@ -19,6 +19,11 @@ class UserViewSet(viewsets.GenericViewSet, mixins.CreateModelMixin):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
+    @action(methods=['GET'], detail=True)
+    def get_favorites(self, request, pk=None):
+        parsed = [StoreSerializer(i).data for i in request.user.favorites.all()]
+        return JsonResponse({"list": parsed})
+
 class StoreViewSet(viewsets.ModelViewSet):
     queryset = Store.objects.all()
     serializer_class = StoreSerializer
@@ -50,11 +55,20 @@ class StoreViewSet(viewsets.ModelViewSet):
         return HttpResponse(str(codeUUID))
 
     @action(methods=['POST'], detail=True)
-    def favourite(self, request):
-        return JsonResponse({
-            "hello": "bruh"
-        })
-
+    def favorite(self, request, pk=None):
+        store = get_object_or_404(Store, pk=pk)
+        if store not in request.user.favorites.all():
+            request.user.favorites.add(pk)
+            return JsonResponse({
+                "status": "success",
+                "type": "add"
+            })
+        else: 
+            request.user.favorites.remove(pk)
+            return JsonResponse({
+                "status": "success",
+                "type": "remove"
+            })
 
 class CodeViewSet(viewsets.GenericViewSet, mixins.ListModelMixin):
     queryset = Code.objects.all()
