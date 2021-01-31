@@ -16,3 +16,5 @@ sqlparse==0.4.1
 toml==0.10.2
 uritemplate==3.0.1
 wrapt==1.12.1
+django-rest-auth==0.9.5
+django-allauth==0.44.0

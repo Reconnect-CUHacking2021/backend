@@ -21,6 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/', include('api.urls')),
     path('auth/', include('rest_auth.urls')),
-    path('auth/register/', include('rest_auth.registration.urls'))
+    path('auth/register/', include('rest_auth.registration.urls')),
+    path('', include('frontend.urls')),
 ]
 

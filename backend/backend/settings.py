@@ -25,7 +25,7 @@ SECRET_KEY = '06(7znjixd0n^k#*)7m-6hucwv8ifr7#xr-$r5jh9_at^cqk5&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '192.168.0.196']
 
 # Application definition
 
@@ -63,7 +63,7 @@ ROOT_URLCONF = 'backend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['./frontend/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -75,6 +75,9 @@ TEMPLATES = [
         },
     },
 ]
+
+
+STATICFILES_DIRS = ['./frontend/static']
 
 WSGI_APPLICATION = 'backend.wsgi.application'
 
@@ -126,7 +129,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/frontend/static/'
 
 
 AUTH_USER_MODEL = "api.User"
