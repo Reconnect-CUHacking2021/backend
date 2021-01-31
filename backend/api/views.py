@@ -4,6 +4,7 @@ from rest_framework import viewsets, mixins
 from rest_framework.decorators import action
 from django.views.generic import View
 from rest_framework.permissions import IsAuthenticated
+from django.db.models import Q
 
 import qrcode
 import qrcode.image.svg
@@ -23,6 +24,14 @@ class UserViewSet(viewsets.GenericViewSet, mixins.CreateModelMixin):
     def get_favorites(self, request, pk=None):
         parsed = [StoreSerializer(i).data for i in request.user.favorites.all()]
         return JsonResponse({"list": parsed})
+
+    @action(methods=['GET'], detail=True)
+    def is_store_owner(self, request, pk=None):
+        return JsonResponse({"result": request.user.is_store_owner})
+
+    @action(methods=['GET'], detail=True)
+    def is_vaccinated(self, request, pk=None):
+        return JsonResponse({"result": request.user.vaccination_info})
 
 class StoreViewSet(viewsets.ModelViewSet):
     queryset = Store.objects.all()
@@ -69,6 +78,16 @@ class StoreViewSet(viewsets.ModelViewSet):
                 "status": "success",
                 "type": "remove"
             })
+
+    @action(methods=['GET'], detail=True)
+    def get_store_patreons(self, request, pk=None):
+        store = get_object_or_404(Store, pk=pk)
+        codes = Code.objects.filter(
+            Q(store=store) & Q(in_store=True)
+        ).all()
+        return JsonResponse({
+            "num": str(len(codes))
+        })
 
 class CodeViewSet(viewsets.GenericViewSet, mixins.ListModelMixin):
     queryset = Code.objects.all()

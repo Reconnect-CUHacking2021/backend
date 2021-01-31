@@ -63,7 +63,7 @@ ROOT_URLCONF = 'backend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['./frontend/templates'],
+        'DIRS': [BASE_DIR / 'frontend/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -77,8 +77,7 @@ TEMPLATES = [
 ]
 
 
-STATICFILES_DIRS = ['./frontend/static']
-
+STATICFILES_DIRS = [BASE_DIR / 'frontend/static']
 WSGI_APPLICATION = 'backend.wsgi.application'
 
 
@@ -138,6 +137,8 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
     ]
 }
 
