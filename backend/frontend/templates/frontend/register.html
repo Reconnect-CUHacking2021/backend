@@ -1,0 +1,36 @@
+{% load static %}
+<html>
+
+<head>
+  <link rel="stylesheet" href="{% static 'frontend/register.css' %}">
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+  <title>Register</title>
+</head>
+
+<body>
+  <div class="main">
+    <p class="sign" align="center">Register</p>
+    <form class="form1" method="post" action="../auth/register/">
+      <input class="un" type="text" name="username" align="center" placeholder="Username">
+      <input class="un" type="text" name="email" align="center" placeholder="Email">
+      <input class="pass" type="password" name="password1" align="center" placeholder="Password">
+      <input class="pass" type="password" name="password2" align="center" placeholder="Password Again">
+      <input class="un" type="text" name="name" align="center" placeholder="Name">
+      <input class="un" type="text" name="phone" align="center" placeholder="Phone">
+      <select class="un" name="vaccination_info">
+        <option value="NV">Not Vaccinated</option>
+        <option value="V">Vaccinated</option>
+      </select>
+      <div class="un">
+        <p style="display: inline-block; margin: 0px;">Is A Store Owner?</p>
+        <input type="checkbox" name="is_store_owner" value="true">
+      </div>
+      <button class="submit" value="Login" align="center">Register</button>
+      <p class="forgot" align="center"><a href="../login">Have An Account?</p>  
+    </div>
+     
+</body>
+
+</html>
